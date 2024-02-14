@@ -1,0 +1,14 @@
+com.vedruna.redsocial
+com.vedruna.redsocial.controller
+com.vedruna.redsocial.dto
+com.vedruna.redsocial.persistence.model
+com.vedruna.redsocial.persistence.repository
+com.vedruna.redsocial.sc.handler
+com.vedruna.redsocial.sc.model
+com.vedruna.redsocial.sc.security.auth.controllers
+com.vedruna.redsocial.sc.security.auth.model
+com.vedruna.redsocial.sc.security.auth.services
+com.vedruna.redsocial.sc.security.config
+com.vedruna.redsocial.sc.security.jwt
+com.vedruna.redsocial.service
+com.verdruna.redsocial
