@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inicio</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#allPublications">Todas las Publicaciones</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#followedPublications">Publicaciones de Seguidos</a>
+        </li>
+    </ul>
+    
+    <div class="mt-3">
+        <a class="btn btn-success" href="/publish">Crear Publicación</a>
+        <a class="btn btn-danger" href="/logout">Cerrar Sesión</a>
+    </div>
+
+    <!-- Tab panes -->
+    <div class="tab-content mt-2">
+        <!-- Todas las publicaciones -->
+        <div id="allPublications" class="tab-pane fade show active">
+            <h3>Todas las Publicaciones:</h3>
+            <ul>
+                <li th:each="publication : ${allPublications}">
+                    <span th:text="${publication.text}"></span>
+                    <a th:href="@{'/profile/' + ${publication.author.userName}}" class="btn btn-info btn-sm">Ver Perfil</a>
+                    <a th:href="@{'/viewPublication/' + ${publication.publicationID}}" class="btn btn-primary btn-sm">Ver Publicación</a>
+                    <th:if="${publication.author.userId == currentUser.userId}">
+                        <a th:href="@{'/editPublication/' + ${publication.publicationID}}" class="btn btn-warning btn-sm">Editar Publicación</a>
+                    </th:if>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Publicaciones de seguidos -->
+        <div id="followedPublications" class="tab-pane fade">
+            <h3>Publicaciones de Seguidos:</h3>
+            <ul>
+                <li th:each="followedPublication : ${followedPublications}">
+                    <span th:text="${followedPublication.text}"></span>
+                    <a th:href="@{'/profile/' + ${followedPublication.author.userName}}" class="btn btn-info btn-sm">Ver Perfil</a>
+                    <a th:href="@{'/viewPublication/' + ${followedPublication.publicationID}}" class="btn btn-primary btn-sm">Ver Publicación</a>
+                    <th:if="${followedPublication.author.userId == currentUser.userId}">
+                        <a th:href="@{'/editPublication/' + ${followedPublication.publicationID}}" class="btn btn-warning btn-sm">Editar Publicación</a>
+                    </th:if>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script>
+    function showAllPublications() {
+        $('#allPublications').addClass('show active');
+        $('#followedPublications').removeClass('show active');
+    }
+
+    function showFollowedPublications() {
+        $('#allPublications').removeClass('show active');
+        $('#followedPublications').addClass('show active');
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!-- publish.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear Publicación</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+	
+	<div class="container mt-5">
+	    <h2>Crear Nueva Publicación</h2>
+	    <form method="post" action="/publish">
+	        <div class="form-group">
+	            <label for="text">Texto de la Publicación:</label>
+	            <textarea class="form-control" id="text" name="text" rows="3" required></textarea>
+	        </div>
+	        <button type="submit" class="btn btn-primary">Publicar</button>
+	    </form>
+	</div>
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>
