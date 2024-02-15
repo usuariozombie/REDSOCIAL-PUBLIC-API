@@ -12,6 +12,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.vedruna.redsocial.sc.security.jwt.JWTAuthenticationFilter;
 
+/**
+ * Configuración de seguridad para la aplicación, que establece reglas de acceso, proveedores de autenticación y filtros de seguridad.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -22,14 +25,21 @@ public class SecurityConfig {
     @Autowired
     private AuthenticationProvider authProvider;
 
+    /**
+     * Configuración de la cadena de filtros de seguridad.
+     *
+     * @param http Objeto HttpSecurity que permite configurar la seguridad de la aplicación.
+     * @return La cadena de filtros de seguridad configurada.
+     * @throws Exception Si ocurre un error durante la configuración de la seguridad.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests( authReq ->
+                .authorizeHttpRequests(authReq ->
                         authReq.requestMatchers("/auth/**", "/swagger-ui/**", "/v3/**", "/api/login", "/api/register", "/api/profile/{username}", "/api/user/{userId}/publications").permitAll()
-                        .anyRequest().authenticated()
+                                .anyRequest().authenticated()
                 )
-                .sessionManagement( sessionManager -> sessionManager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(sessionManager -> sessionManager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
